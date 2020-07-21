@@ -84,3 +84,23 @@ http.createServer((request, response) => {
 | 4xx      | 요청 오류 ( ex 404 Not Found) |
 | 5xx      | 서버 오류                     |
 
+
+
+#### express를 활용한 웹서버 띄우기
+
+```js
+const express = require('express');
+const app = express();
+const port = 3000; // port 번호
+
+// url 추가
+app.get('/', (req, res) =>{
+    res.send('hello express');
+});
+
+// 웹서버 생성
+app.listen(port, () => {
+    console.log('express listening on port', port);
+});
+```
+
