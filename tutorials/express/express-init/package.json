@@ -1,0 +1,16 @@
+{
+  "name": "express-init",
+  "version": "1.0.0",
+  "description": "node online",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Yeeun Heo",
+  "license": "ISC",
+  "keywords": [],
+  "dependencies": {
+    "express": "^4.17.1",
+    "uuid4": "^2.0.2"
+  }
+}
