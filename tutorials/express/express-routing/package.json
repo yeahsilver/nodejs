@@ -1,0 +1,14 @@
+{
+  "name": "express-routing",
+  "version": "1.0.0",
+  "description": "practice using express",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
