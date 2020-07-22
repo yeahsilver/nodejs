@@ -40,6 +40,16 @@ function vipMiddleware(req, res, next){
 app.use('/admin', vipMiddleware, admin);
 app.use('/contact', contact);
 
+// 404
+app.use( (req, res, _ ) => {
+    res.status(404).render('common/404.html');
+});
+
+// 500
+app.use((err, req, _ ) => {
+    res.status(500).render('common/500.html');
+});
+
 // 웹서버 생성
 app.listen(port, () => {
     console.log('express listening on port', port);
