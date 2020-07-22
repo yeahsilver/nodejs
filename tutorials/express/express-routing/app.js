@@ -1,5 +1,6 @@
 const express = require('express');
 const nunjucks  = require('nunjucks');
+const logger = require('morgan');
 
 const admin = require('./routes/admin');
 const contact = require('./routes/contact');
@@ -12,12 +13,20 @@ nunjucks.configure('template',{
     express: app // express 객체 설정
 });
 
+// 미들웨어 세팅
+app.use(logger('dev'));
+
 // url 추가
 app.get('/', (req, res) =>{
     res.send('hello express');
 });
 
-app.use('/admin', admin);
+function vipMiddleware(req, res, next){
+    console.log("최우선 미들웨어");
+    next();
+}
+
+app.use('/admin', vipMiddleware, admin);
 app.use('/contact', contact);
 
 // 웹서버 생성
