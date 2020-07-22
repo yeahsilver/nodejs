@@ -19,6 +19,8 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : false}));
 
+app.use('/uploads', express.static('uploads'));
+
 // url 추가
 app.get('/', (req, res) =>{
     res.send('hello express');
@@ -29,6 +31,7 @@ function vipMiddleware(req, res, next){
     next();
 }
 
+// routing
 app.use('/admin', vipMiddleware, admin);
 app.use('/contact', contact);
 
