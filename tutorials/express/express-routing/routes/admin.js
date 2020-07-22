@@ -34,4 +34,16 @@ router.get('/products', (req, res) => {
     }) // 템플릿 전송
 });
 
+router.get('/products/write', (req, res) => {
+    res.render('admin/write.html');
+});
+
+// /products/write의 데이터 post
+router.post('/products/write', (req, res) => {
+    // res.send(req.body.name);
+    // res.send(req.body.price);
+    // res.send(req.body.description);
+    res.send(req.body);
+});
+
 module.exports = router;

@@ -1,6 +1,7 @@
 const express = require('express');
 const nunjucks  = require('nunjucks');
 const logger = require('morgan');
+const bodyParser = require('body-parser');
 
 const admin = require('./routes/admin');
 const contact = require('./routes/contact');
@@ -15,6 +16,8 @@ nunjucks.configure('template',{
 
 // 미들웨어 세팅
 app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended : false}));
 
 // url 추가
 app.get('/', (req, res) =>{
