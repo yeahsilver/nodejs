@@ -151,3 +151,30 @@ exports.post_products_write = ( req , res ) => {
     })
 ```
 
+
+
+#### DB 조회
+
+```js
+// admin.ctrl.js
+exports.get_products = ( _ , res) => {
+    // res.render( 'admin/products.html' , 
+    //     { message : "hello" } // message 란 변수를 템플릿으로 내보낸다.
+    // );
+
+    models.Products.findAll({
+
+    }).then((productList) => {
+        res.render('admin/products.html', {productList: productList})
+    });
+}
+
+// products.html
+
+
+// 키 값고 value값이 같으면 products:products 대신 products만 써도 됨.
+}).then( (products) => {
+        res.render('admin/products.html', {products})
+    });
+```
+
