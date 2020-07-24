@@ -128,6 +128,10 @@ dbConnection(){
 // 데이터를 데이터베이스에 POST하는 역할!
 router.post('/products/write', ctrl.post_products_write );
 
+
+```
+
+```js
 // admin.ctrl.js
 exports.post_products_write = ( req , res ) => {
     // res.send(req.body);
@@ -142,9 +146,7 @@ exports.post_products_write = ( req , res ) => {
         res.redirect('/admin/products');
     });
 }
-```
 
-```js
 //admin.ctrl.js를 아래와 같이 사용해도 같은 결과 출력
  models.Products.create(req.body).then(() => {
         res.redirect('/admin/products');
@@ -168,13 +170,41 @@ exports.get_products = ( _ , res) => {
         res.render('admin/products.html', {productList: productList})
     });
 }
+```
 
+```js
 // products.html
-
-
 // 키 값고 value값이 같으면 products:products 대신 products만 써도 됨.
 }).then( (products) => {
         res.render('admin/products.html', {products})
     });
+```
+
+
+
+#### 상세페이지 작성
+
+```html
+<!-- product.js -->
+<td> 
+                <a href = "/admin/products/detail/{{ product.id }}">
+                    {{ product.name }} 
+                </a> 
+            </td> 
+```
+
+```js
+// admin/index.js
+router.get('/product/write/:id', ctrl.get_products_detail);
+```
+
+```js
+// admin_ctrl.js
+// detail.html 연결
+exports.get_products_detail = (req, res) => {
+    //req.params.id;
+    models.Products.findByPk(req.params.id).then((product) =>{
+        res.render('admin/detail.html', {product});
+})
 ```
 
