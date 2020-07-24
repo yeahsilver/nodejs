@@ -80,3 +80,42 @@ const sequelize = new Sequelize( process.env.DATABASE,
      }); // 각각에 있는 파일들을 참조해서 테이블들을 생성
 ```
 
+
+
+#### DB 모델 작성
+
+```js
+// products.js
+// 데이터베이스 정의
+module.exports = (sequelize, DataTypes) => {
+    const Products = sequelize.define('products',{
+        id: {type: DataTypes.INTEGER, primarykey: true, autoIncrement: true },
+        name: {type: DataTypes.STRING},
+        price: {type: DataTypes.INTEGER },
+        description : {type: DataTypes.TEXT }
+    });
+    return Products;
+}
+```
+
+```js
+// app.js
+// 데이터베이스와 sync 맞추기
+dbConnection(){
+        // DB authentication
+        db.sequelize.authenticate()
+        .then(() => {
+            // DB 접속이 성공하면
+            console.log('Connection has been established successfully.');
+        })
+        .then(() => {
+            // 위치에 맞게 DB 생성
+            console.log('DB Sync complete');
+            db.sequelize.sync(); // 이 부분!
+        })
+        .catch( err => {
+            console.error('Unable to connect to the database', err);
+        });
+    }
+```
+

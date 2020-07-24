@@ -46,6 +46,7 @@ class App {
         .then(() => {
             // 위치에 맞게 DB 생성
             console.log('DB Sync complete');
+            db.sequelize.sync();
         })
         .catch( err => {
             console.error('Unable to connect to the database', err);
