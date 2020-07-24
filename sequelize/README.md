@@ -208,3 +208,62 @@ exports.get_products_detail = (req, res) => {
 })
 ```
 
+
+
+#### moment.js
+
+- 함수 추가의 형태로 이루어짐.
+- 데이터의 형식을 변경시켜줌.
+
+```js
+// Products.js
+// 데이터 형식 변경
+Products.prototype.dateFormat = (date) => (
+	moment(date).format('YYYY-MM-DD')
+);
+```
+
+
+
+#### DB 수정
+
+```js
+// admin.ctrl.js
+// 아이디에 맞게 수정창으로 이동하기
+exports.get_products_edit = ( req, res ) => {
+    models.Products.findByPk(req.params.id).then( ( product ) => {
+        res.render( 'admin/write.html' , { product });
+    });
+}
+
+// 수정한 내용을 post
+exports.post_products_edit = ( req, res ) => {
+    models.Products.update({
+        name: req.body.name,
+        price: req.body.price,
+        description: req.body.description,
+    },{
+        where : { id : req.params.id }
+    }).then(()=> {
+        res.redirect('/admin/products/detail/' + req.params.id );
+    })
+};
+```
+
+```js
+// admin/index.js
+router.get('/products/edit/:id', ctrl.get_products_edit );
+router.post('/products/edit/:id', ctrl.post_products_edit );
+```
+
+```html
+<!-- write.html -->
+<tr>
+   <th>제품명</th>
+   		<td>
+        <!-- value에 값을 넣어줌 -->
+        <input type="text" name="name" class="form-control" value = "{{ product.name }}"/> 
+  		</td>
+</tr>
+```
+
