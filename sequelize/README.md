@@ -267,3 +267,49 @@ router.post('/products/edit/:id', ctrl.post_products_edit );
 </tr>
 ```
 
+
+
+#### DB 삭제
+
+```js
+// admin/index.js
+router.get('/products/delete/:id', ctrl.get_products_delete );
+```
+
+```js
+// admin.ctrl.js
+exports.get_products_delete = ( req, res ) => {
+    models.Products.destroy({
+        where : {
+            id : req.params.id
+        }
+    }).then(() => {
+        res.redirect('/admin/products');
+    })
+}
+```
+
+```html
+<!-- products.html -->
+<a href="/admin/products/delete/{{ product.id }}" class="btn btn-danger" onclick="return confirm('삭제하시겠습니까?')">삭제</a>
+```
+
+
+
+
+
+#### CRUD
+
+> select, insert, update, delete
+
+```js
+models.테이블명.create(데이터) // 테이블 생성
+models.테이블명.findAll(조회조건) // 데이터 전체 검색
+models.테이블명.findByPk(primary key) // 데이터 일부 검색
+models.테이블명.findOne(조회조건) // 데이터 한개 검색
+
+models.테이블명.update(데이터, 조회조건) // 데이터 업데이트
+
+models.테이블명.destroy(조회조건) // 데이터 제거
+```
+
