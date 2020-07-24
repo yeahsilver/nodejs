@@ -119,3 +119,35 @@ dbConnection(){
     }
 ```
 
+
+
+#### DB 입력
+
+```js
+// controller/admin/index.js
+// 데이터를 데이터베이스에 POST하는 역할!
+router.post('/products/write', ctrl.post_products_write );
+
+// admin.ctrl.js
+exports.post_products_write = ( req , res ) => {
+    // res.send(req.body);
+    // models에 있는 products 테이블ㄹ에 데이터 생성
+    models.Products.create({
+       // 각각에 저장
+        name: req.body.name,
+        price: req.body.price,
+        description: req.body.description
+    }).then(() => { // callback
+        
+        res.redirect('/admin/products');
+    });
+}
+```
+
+```js
+//admin.ctrl.js를 아래와 같이 사용해도 같은 결과 출력
+ models.Products.create(req.body).then(() => {
+        res.redirect('/admin/products');
+    })
+```
+
