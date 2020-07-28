@@ -25,7 +25,7 @@ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '루트 �
 
 #### DB 접속 (MySql)
 
-- sequalizer 설치
+- sequalize 설치
 
 ```
 npm install --save sequelize
